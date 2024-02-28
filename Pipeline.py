@@ -9,7 +9,7 @@ from transformers import pipeline, WhisperProcessor, WhisperForConditionalGenera
 pipe = pipeline("automatic-speech-recognition", model="openai/whisper-large-v3")
 
 # whisper tiny model for English only
-pipe_small = pipeline("automatic-speech-recognition", model="openai/whisper-tiny.en")
+pipe_med = pipeline("automatic-speech-recognition", model="openai/whisper-medium")
 
 
 # Set up GPIO pin for push button
@@ -71,7 +71,7 @@ def record_audio():
     wf.close()
 
     # Perform speech recognition
-    recognized_text = pipeline(WAVE_OUTPUT_FILENAME)[0]['transcription']
+    recognized_text = pipe_med(WAVE_OUTPUT_FILENAME)[0]['transcription']
 
     # outputs a string text
     return recognized_text
